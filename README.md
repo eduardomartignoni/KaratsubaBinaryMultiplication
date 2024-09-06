@@ -41,3 +41,5 @@ STEPS:
 6. R2 = multiply(Xr,Yr).
 7. R3 = ((Xl + Xr) \* (Yl + Yr)).
 8. Return R1 * 2ˆ(2*ceil(n/2)) + (R3 - R2 - R1) * 2ˆ(2*ceil(lenght/2)) + R2.
+
+Repository: https://github.com/eduardomartignoni/KaratsubaBinaryMultiplication
