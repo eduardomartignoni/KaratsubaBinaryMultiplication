@@ -9,7 +9,7 @@ public class KaratsubaBinaryMultiplication {
         String num1 = args[0];
         String num2 = args[1];
 
-        String result = multiplyKaratsuba(num1, num2);
+        StringBuilder result = multiplyKaratsuba(num1, num2);
         System.out.println(result);
     }
 
@@ -187,16 +187,16 @@ public class KaratsubaBinaryMultiplication {
         return result;
     }
 
-    private static String multiplyKaratsuba(String num1Str, String num2Str) {
+    private static StringBuilder multiplyKaratsuba(String num1Str, String num2Str) {
         StringBuilder num1 = new StringBuilder(num1Str);
         StringBuilder num2 = new StringBuilder(num2Str);
 
         int length = makeEqualLength(num1, num2);
 
         if (length == 0) {
-            return "0";
+            return new StringBuilder("0");
         } else if (length == 1) {
-            return (num1.charAt(0) == '1' && num2.charAt(0) == '1') ? "1" : "0";
+            return (num1.charAt(0) == '1' && num2.charAt(0) == '1') ? new StringBuilder("1") : new StringBuilder("0");
         }
 
         StringBuilder xl = firstHalf(num1);
@@ -211,8 +211,12 @@ public class KaratsubaBinaryMultiplication {
 
         String P1 = shiftLeft(R1, 2 * (int) Math.ceil(length / 2.0)); 
         String P2 = shiftLeft(subtractStrings(subtractStrings(R3, R1), R2), (int) Math.ceil(length / 2.0));
-        String result = sumStrings(sumStrings(P1, P2), R2);
-
+        String P3 = sumStrings(sumStrings(P1, P2), R2);
+        
+        StringBuilder result = new StringBuilder(P3);
+        while (result.length() > 1 && result.charAt(0) == '0') {
+            result.deleteCharAt(0);
+        }
         return result;
     }
 }
